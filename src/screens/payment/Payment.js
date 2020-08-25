@@ -5,13 +5,12 @@ import React from "react";
 import { View, Text, Alert, Picker } from "react-native";
 import { Header } from "../../components/Header";
 import { marginMedium, textSize } from "../../constants/dimensions/Dimensions";
-import {
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native-gesture-handler";
+import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import { mainColor } from "../../constants/colors/Colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { CheckOut } from "../checkOut/checkOut";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 export const Payment = () => {
   const AlertMsg = () =>
     Alert.alert(
@@ -154,6 +153,7 @@ export const Payment = () => {
   };
   //----
   const TopUpButton = () => {
+    const navigation = useNavigation();
     return (
       <TouchableOpacity
         style={{
@@ -163,26 +163,47 @@ export const Payment = () => {
           borderRadius: 10,
           alignItems: "center",
         }}
-        onPress={() => AlertMsg()}
+        onPress={() => navigation.push("CheckOut")}
       >
         <Text style={{ color: "white", fontSize: textSize }}>Top Up</Text>
       </TouchableOpacity>
     );
   };
 
+  const PaymentContent = () => {
+    return (
+      <View style={{ flex: 1 }}>
+        <Header title={"Payment Method"} />
+        <View flex={2}>
+          <ScrollView horizontal={true}>
+            <CardPay />
+            <CardPay2 />
+          </ScrollView>
+        </View>
+        <View flex={1}>
+          <PricePart />
+        </View>
+        <TopUpButton />
+      </View>
+    );
+  };
+  const Stack = createStackNavigator();
   return (
-    <View style={{ flex: 1 }}>
-      <Header title={"Payment Method"} />
-      <View flex={2}>
-        <ScrollView horizontal={true}>
-          <CardPay />
-          <CardPay2 />
-        </ScrollView>
-      </View>
-      <View flex={1}>
-        <PricePart />
-      </View>
-      <TopUpButton />
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="PaymentContent"
+        component={PaymentContent}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="CheckOut"
+        component={CheckOut}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
   );
 };

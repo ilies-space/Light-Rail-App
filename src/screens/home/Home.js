@@ -2,14 +2,16 @@
  * The Home Screen
  */
 
-import React from "react";
-import { View, Text, Image, Picker, Dimensions } from "react-native";
+import React, { useState } from "react";
+import { View, Text, Picker, Dimensions } from "react-native";
 import { Header } from "../../components/Header";
 import { textSize, marginMedium } from "../../constants/dimensions/Dimensions";
 import { app_name } from "../../constants/data/Data";
 import MapView from "react-native-maps";
 
-export const Home = () => {
+export const Home = ({ navigation }) => {
+  const [selectedValue, setSelectedValue] = useState("test");
+
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Header title={app_name} />
@@ -59,6 +61,10 @@ export const Home = () => {
             width: "100%",
           }}
           mode={"dropdown"}
+          selectedValue={selectedValue}
+          onValueChange={(itemValue, itemIndex) =>
+            navigation.push("TripDetails")
+          }
         >
           <Picker.Item label="Where To ?" value="0" />
           <Picker.Item label="UNSW High Street?" value="0" />

@@ -14,6 +14,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { mainColor } from "../constants/colors/Colors";
+import { HomeStackNavigation } from "./homeStackNavigation";
 export const BottomNavigatoin = () => {
   const Tab = createBottomTabNavigator();
 
@@ -29,7 +30,7 @@ export const BottomNavigatoin = () => {
     >
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeStackNavigation}
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (

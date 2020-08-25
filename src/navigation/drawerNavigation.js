@@ -6,6 +6,7 @@ import { TripPlanner } from "../screens/tripPlanner/TripPlanner";
 import { Faqs } from "../screens/faqs/Faqs";
 import { Help } from "../screens/help/Help";
 import { mainColor } from "../constants/colors/Colors";
+import { SingUp } from "../screens/singUp/SingUp";
 export const DrawerNavigation = () => {
   const Drawer = createDrawerNavigator();
   return (
@@ -22,7 +23,7 @@ export const DrawerNavigation = () => {
       <Drawer.Screen name="MyAccount" component={MyAccount} />
       <Drawer.Screen name="Faqs" component={Faqs} />
       <Drawer.Screen name="Help" component={Help} />
-      <Drawer.Screen name="Sing out" component={MyAccount} />
+      <Drawer.Screen name="Sing out" component={SingUp} />
     </Drawer.Navigator>
   );
 };
