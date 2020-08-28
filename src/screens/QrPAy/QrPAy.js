@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Camera } from "expo-camera";
+
 import { View, Text, Alert } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -7,8 +9,35 @@ import { mainColor } from "../../constants/colors/Colors";
 import { marginMedium, textSize } from "../../constants/dimensions/Dimensions";
 import { FontAwesome } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { OpenCamera } from "./CameraApi";
+import { createStackNavigator } from "@react-navigation/stack";
+
 export const QrPay = () => {
+  const Stack = createStackNavigator();
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="PaymentContent"
+        component={QrCotent}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="OpenCamera"
+        component={OpenCamera}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const QrCotent = () => {
   const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, backgroundColor: mainColor }}>
       <View style={{ backgroundColor: mainColor, paddingVertical: 18 }}>
@@ -122,15 +151,6 @@ export const QrPay = () => {
   );
 };
 
-const alertDone = (navigation) => {
-  Alert.alert(
-    "DONE ",
-    "please confire yor action ? ",
-    [{ text: "OK", onPress: () => navigation.navigate("Home") }],
-    { cancelable: false }
-  );
-};
-
 const BtnGo = () => {
   const navigation = useNavigation();
 
@@ -143,7 +163,7 @@ const BtnGo = () => {
         borderRadius: 10,
         alignItems: "center",
       }}
-      onPress={() => alertDone(navigation)}
+      onPress={() => navigation.push("OpenCamera")}
     >
       <Text style={{ color: "white", fontSize: textSize }}>Go</Text>
     </TouchableOpacity>
