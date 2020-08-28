@@ -11,6 +11,9 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { CheckOut } from "../checkOut/checkOut";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { NfcPay } from "../nfcPay/nfPay";
+import { Home } from "../home/Home";
+import { QrPay } from "../QrPAy/QrPAy";
 export const Payment = () => {
   const AlertMsg = () =>
     Alert.alert(
@@ -22,13 +25,15 @@ export const Payment = () => {
 
   //----
   const CardPay = () => {
+    const navigation = useNavigation();
     return (
-      <View
+      <TouchableOpacity
         style={{
           justifyContent: "center",
           alignItems: "center",
           margin: marginMedium,
         }}
+        onPress={() => navigation.push("CheckOutNfc")}
       >
         <View
           style={{
@@ -48,18 +53,20 @@ export const Payment = () => {
         <Text style={{ color: "gray", fontSize: textSize, marginTop: 10 }}>
           Physical Card
         </Text>
-      </View>
+      </TouchableOpacity>
     );
   };
   //----
   const CardPay2 = () => {
+    const navigation = useNavigation();
     return (
-      <View
+      <TouchableOpacity
         style={{
           justifyContent: "center",
           alignItems: "center",
           margin: marginMedium,
         }}
+        onPress={() => navigation.push("QrPay")}
       >
         <View
           style={{
@@ -79,7 +86,7 @@ export const Payment = () => {
         <Text style={{ color: "gray", fontSize: textSize, marginTop: 10 }}>
           Virtual Card
         </Text>
-      </View>
+      </TouchableOpacity>
     );
   };
   //----
@@ -163,7 +170,6 @@ export const Payment = () => {
           borderRadius: 10,
           alignItems: "center",
         }}
-        onPress={() => navigation.push("CheckOut")}
       >
         <Text style={{ color: "white", fontSize: textSize }}>Top Up</Text>
       </TouchableOpacity>
@@ -198,8 +204,22 @@ export const Payment = () => {
         }}
       />
       <Stack.Screen
-        name="CheckOut"
-        component={CheckOut}
+        name="CheckOutNfc"
+        component={NfcPay}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="QrPay"
+        component={QrPay}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Home"
+        component={Home}
         options={{
           headerShown: false,
         }}
