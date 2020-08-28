@@ -42,7 +42,10 @@ export const EditPayments = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <View flex={1} style={{ paddingTop: marginMedium }}>
+      <View
+        flex={1}
+        style={{ paddingTop: marginMedium, marginHorizontal: marginMedium }}
+      >
         <TextInputs />
         <View
           style={{ flexDirection: "row", justifyContent: "space-around" }}

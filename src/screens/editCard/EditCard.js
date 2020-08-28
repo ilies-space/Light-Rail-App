@@ -62,6 +62,7 @@ const TextInputs = () => {
           height: 45,
           borderWidth: 1,
           borderColor: "gray",
+          marginHorizontal: marginMedium,
         }}
       >
         <TextInput placeholder="Card type" />
@@ -73,6 +74,7 @@ const TextInputs = () => {
           borderWidth: 1,
           borderColor: "gray",
           marginVertical: 5,
+          marginHorizontal: marginMedium,
         }}
       >
         <TextInput placeholder=" Card Number" />
@@ -83,6 +85,7 @@ const TextInputs = () => {
           height: 45,
           borderWidth: 1,
           borderColor: "gray",
+          marginHorizontal: marginMedium,
         }}
       >
         <TextInput placeholder="PIN" />
