@@ -4,7 +4,7 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import { Header } from "../../components/Header";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { mainColor } from "../../constants/colors/Colors";
@@ -37,7 +37,7 @@ export const EditPayments = () => {
           >
             Edit Payment Details
           </Text>
-          <TouchableOpacity onPress={() => naviagtion.goBack()}>
+          <TouchableOpacity onPress={() => AlertDone(naviagtion)}>
             <Text style={{ color: "white", fontSize: textSize }}>Save</Text>
           </TouchableOpacity>
         </View>
@@ -55,7 +55,7 @@ export const EditPayments = () => {
         style={{ marginHorizontal: marginMedium, marginVertical: marginMedium }}
       ></View>
       <View style={{ flex: 0.5, backgroundColor: mainColor }}>
-        <View
+        <TouchableOpacity
           style={{
             backgroundColor: "white",
             height: 40,
@@ -67,8 +67,8 @@ export const EditPayments = () => {
           }}
         >
           <FontAwesome5 name="cc-apple-pay" size={32} color="black" />
-        </View>
-        <View
+        </TouchableOpacity>
+        <TouchableOpacity
           style={{
             backgroundColor: "white",
             height: 40,
@@ -80,8 +80,8 @@ export const EditPayments = () => {
           }}
         >
           <FontAwesome5 name="cc-apple-pay" size={32} color="black" />
-        </View>
-        <View
+        </TouchableOpacity>
+        <TouchableOpacity
           style={{
             backgroundColor: "white",
             height: 40,
@@ -93,11 +93,25 @@ export const EditPayments = () => {
           }}
         >
           <FontAwesome name="cc-paypal" size={32} color="black" />
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
 };
+
+const AlertDone = (naviagtion) =>
+  Alert.alert(
+    "save",
+    "information has been saved successfully",
+    [
+      {
+        text: "close",
+        style: "cancel",
+        onPress: () => naviagtion.goBack(),
+      },
+    ],
+    { cancelable: false }
+  );
 
 const TextInputs = () => {
   return (

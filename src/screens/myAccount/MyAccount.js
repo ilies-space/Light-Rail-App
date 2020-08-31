@@ -13,6 +13,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { EditPayments } from "../editPayment/EditPayments";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { SingUp } from "../singUp/SingUp";
+import { SingUpStackNavigation } from "../singUp/SingUpStack";
 
 export const MyAccount = () => {
   const Stack = createStackNavigator();
@@ -41,8 +42,8 @@ export const MyAccount = () => {
         }}
       />
       <Stack.Screen
-        name="SingUp"
-        component={SingUp}
+        name="SingUpStackNavigation"
+        component={SingUpStackNavigation}
         options={{
           headerShown: false,
         }}
@@ -91,7 +92,7 @@ const Buttons = () => {
           paddingVertical: 10,
           marginBottom: 10,
         }}
-        onPress={() => navigation.push("SingUp")}
+        onPress={() => navigation.push("SingUpStackNavigation")}
       >
         <Text style={{ color: "white", fontSize: textSize }}>
           Edit Personal Details

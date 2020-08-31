@@ -6,15 +6,12 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { mainColor } from "../../constants/colors/Colors";
 import { marginMedium, textSize } from "../../constants/dimensions/Dimensions";
 import { FontAwesome } from "@expo/vector-icons";
-export const NfcPay = () => {
+export const NFCPayDone = () => {
   const navigation = useNavigation();
   return (
     <View style={{ flex: 1, backgroundColor: mainColor }}>
       <View style={{ backgroundColor: mainColor, paddingVertical: 18 }}>
         <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Feather name="arrow-left" size={26} color="white" />
-          </TouchableOpacity>
           <View style={{ flex: 1, alignItems: "center" }}>
             <Text
               style={{
@@ -23,13 +20,13 @@ export const NfcPay = () => {
                 fontWeight: "bold",
               }}
             >
-              Check Out
+              checkout
             </Text>
           </View>
         </View>
       </View>
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <FontAwesome name="train" size={90} color="black" />
+        <FontAwesome name="check-circle" size={90} color="black" />
       </View>
       <View
         style={{
@@ -44,7 +41,7 @@ export const NfcPay = () => {
           <Text style={{ fontSize: 25, fontWeight: "bold" }}>
             Physical Card
           </Text>
-          <Text>Click Go and Tap on</Text>
+          <Text>Click Go and Tap off</Text>
         </View>
         <View
           style={{
@@ -123,6 +120,15 @@ export const NfcPay = () => {
   );
 };
 
+const alertDone = (navigation) => {
+  Alert.alert(
+    "DONE ",
+    "please confire yor action ? ",
+    [{ text: "OK", onPress: () => navigation.navigate("Home") }],
+    { cancelable: false }
+  );
+};
+
 const BtnGo = () => {
   const navigation = useNavigation();
 
@@ -135,9 +141,9 @@ const BtnGo = () => {
         borderRadius: 10,
         alignItems: "center",
       }}
-      onPress={() => navigation.navigate("NFCPayDone")}
+      onPress={() => navigation.navigate("Home")}
     >
-      <Text style={{ color: "white", fontSize: textSize }}>Go</Text>
+      <Text style={{ color: "white", fontSize: textSize }}>DONE</Text>
     </TouchableOpacity>
   );
 };

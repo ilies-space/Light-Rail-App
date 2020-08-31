@@ -6,15 +6,14 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { mainColor } from "../../constants/colors/Colors";
 import { marginMedium, textSize } from "../../constants/dimensions/Dimensions";
 import { FontAwesome } from "@expo/vector-icons";
-export const NfcPay = () => {
+import { AntDesign } from "@expo/vector-icons";
+
+export const QrPayDone = () => {
   const navigation = useNavigation();
   return (
     <View style={{ flex: 1, backgroundColor: mainColor }}>
       <View style={{ backgroundColor: mainColor, paddingVertical: 18 }}>
         <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Feather name="arrow-left" size={26} color="white" />
-          </TouchableOpacity>
           <View style={{ flex: 1, alignItems: "center" }}>
             <Text
               style={{
@@ -23,13 +22,13 @@ export const NfcPay = () => {
                 fontWeight: "bold",
               }}
             >
-              Check Out
+              see you later onboard
             </Text>
           </View>
         </View>
       </View>
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <FontAwesome name="train" size={90} color="black" />
+        <FontAwesome name="check-circle" size={90} color="black" />
       </View>
       <View
         style={{
@@ -41,10 +40,8 @@ export const NfcPay = () => {
         }}
       >
         <View style={{ width: "100%", alignItems: "center" }}>
-          <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-            Physical Card
-          </Text>
-          <Text>Click Go and Tap on</Text>
+          <Text style={{ fontSize: 25, fontWeight: "bold" }}>virtual card</Text>
+          <Text>Click Go and Tap off</Text>
         </View>
         <View
           style={{
@@ -59,14 +56,11 @@ export const NfcPay = () => {
               justifyContent: "center",
             }}
           >
-            <FontAwesome name="wifi" size={40} color={mainColor} />
+            <AntDesign name="qrcode" size={40} color={mainColor} />
             <View style={{ flex: 1, alignItems: "center" }}>
               <Text style={{ fontSize: 22, color: mainColor }}>Balance</Text>
               <Text>$ 20.0</Text>
             </View>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <FontAwesome name="get-pocket" size={40} color={mainColor} />
-            </TouchableOpacity>
           </View>
         </View>
         <View>
@@ -135,9 +129,9 @@ const BtnGo = () => {
         borderRadius: 10,
         alignItems: "center",
       }}
-      onPress={() => navigation.navigate("NFCPayDone")}
+      onPress={() => navigation.navigate("Home")}
     >
-      <Text style={{ color: "white", fontSize: textSize }}>Go</Text>
+      <Text style={{ color: "white", fontSize: textSize }}>HOME</Text>
     </TouchableOpacity>
   );
 };

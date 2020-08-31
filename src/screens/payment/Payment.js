@@ -1,8 +1,17 @@
 /**
  * The Payment Screen
  */
-import React from "react";
-import { View, Text, Alert, Picker } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  Alert,
+  Picker,
+  UIManager,
+  findNodeHandle,
+} from "react-native";
+//dropDown :
+//
 import { Header } from "../../components/Header";
 import { marginMedium, textSize } from "../../constants/dimensions/Dimensions";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
@@ -14,7 +23,13 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { NfcPay } from "../nfcPay/nfPay";
 import { Home } from "../home/Home";
 import { QrPay } from "../QrPAy/QrPAy";
+import { QrPayDone } from "../paymentsDone/QrPayDone";
+import { NFCPayDone } from "../paymentsDone/NFCPayDone";
 export const Payment = () => {
+  const [priceValue, setpriceValue] = useState("$ 10.0");
+  const [show, setshow] = useState(false);
+  const [position, setposition] = useState({});
+
   const AlertMsg = () =>
     Alert.alert(
       "Top up",
@@ -220,6 +235,21 @@ export const Payment = () => {
       <Stack.Screen
         name="Home"
         component={Home}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="QrPayDone"
+        component={QrPayDone}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="NFCPayDone"
+        component={NFCPayDone}
         options={{
           headerShown: false,
         }}

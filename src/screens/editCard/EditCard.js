@@ -2,7 +2,7 @@
  * The Help Screen
  */
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import { Header } from "../../components/Header";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { mainColor } from "../../constants/colors/Colors";
@@ -35,7 +35,7 @@ export const EditCard = () => {
           >
             Add Opal/physical card
           </Text>
-          <TouchableOpacity onPress={() => naviagtion.goBack()}>
+          <TouchableOpacity onPress={() => AlertDone(naviagtion)}>
             <Text style={{ color: "white", fontSize: textSize }}>Save</Text>
           </TouchableOpacity>
         </View>
@@ -52,6 +52,20 @@ export const EditCard = () => {
     </View>
   );
 };
+
+const AlertDone = (naviagtion) =>
+  Alert.alert(
+    "save",
+    "information has been saved successfully",
+    [
+      {
+        text: "close",
+        style: "cancel",
+        onPress: () => naviagtion.goBack(),
+      },
+    ],
+    { cancelable: false }
+  );
 
 const TextInputs = () => {
   return (

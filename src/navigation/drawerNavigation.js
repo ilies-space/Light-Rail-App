@@ -6,12 +6,12 @@ import { TripPlanner } from "../screens/tripPlanner/TripPlanner";
 import { Faqs } from "../screens/faqs/Faqs";
 import { Help } from "../screens/help/Help";
 import { mainColor } from "../constants/colors/Colors";
-import { SingUp } from "../screens/singUp/SingUp";
+import { SingUpStackNavigation } from "../screens/singUp/SingUpStack";
 export const DrawerNavigation = () => {
   const Drawer = createDrawerNavigator();
   return (
     <Drawer.Navigator
-      initialRouteName="BottomNavigation"
+      initialRouteName="Home"
       drawerContentOptions={{
         activeTintColor: "white",
         backgroundColor: mainColor,
@@ -23,7 +23,14 @@ export const DrawerNavigation = () => {
       <Drawer.Screen name="MyAccount" component={MyAccount} />
       <Drawer.Screen name="Faqs" component={Faqs} />
       <Drawer.Screen name="Help" component={Help} />
-      <Drawer.Screen name="Sing out" component={SingUp} />
+      <Drawer.Screen
+        name="SingUpStackNavigation"
+        component={SingUpStackNavigation}
+        options={{
+          headerShown: false,
+          title: "sing out",
+        }}
+      />
     </Drawer.Navigator>
   );
 };

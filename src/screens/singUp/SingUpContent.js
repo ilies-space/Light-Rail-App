@@ -8,7 +8,8 @@ import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { mainColor } from "../../constants/colors/Colors";
 import { AntDesign } from "@expo/vector-icons";
 import { textSize, marginMedium } from "../../constants/dimensions/Dimensions";
-export const SingUp = ({ navigation }) => {
+
+export const SingUpContent = ({ navigation }) => {
   return (
     <View style={{ flex: 1, backgroundColor: "#EFF1F8" }}>
       <Header title={"SingUp"} />
@@ -47,7 +48,7 @@ export const SingUp = ({ navigation }) => {
             alignItems: "center",
             paddingVertical: 10,
           }}
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.push("MyAccount")}
         >
           <Text style={{ color: "white", fontSize: textSize }}>Sing up</Text>
         </TouchableOpacity>
@@ -60,7 +61,6 @@ export const SingUp = ({ navigation }) => {
     </View>
   );
 };
-
 const TextInputs = () => {
   return (
     <View style={{}}>
