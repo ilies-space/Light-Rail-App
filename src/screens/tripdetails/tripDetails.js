@@ -1,7 +1,7 @@
 /**
  * The TripDetails Screen when chosing distination :
  */
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Dimensions } from "react-native";
 import { TouchableOpacity, TextInput } from "react-native-gesture-handler";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -21,6 +21,8 @@ export const TripDetails = ({ navigation }) => {
     <MaterialCommunityIcons name="timer-sand" size={24} color={mainColor} />
   );
 
+  const [from, setfrom] = useState("");
+  const [to, setto] = useState("");
   const Header = () => {
     return (
       <View
@@ -107,9 +109,21 @@ export const TripDetails = ({ navigation }) => {
               borderRadius: 5,
             }}
           >
-            <TextInput placeholder={"UNSW High Street"} />
+            <TextInput
+              placeholder={"UNSW High Street"}
+              onChangeText={(value) => setfrom(value)}
+            />
           </View>
-          <FontAwesome name="star-o" size={24} color="white" />
+          <TouchableOpacity
+            onPress={() =>
+              navigation.push("TripPlanner", {
+                from: from,
+                to: to,
+              })
+            }
+          >
+            <FontAwesome name="star-o" size={24} color="white" />
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -141,7 +155,10 @@ export const TripDetails = ({ navigation }) => {
               borderRadius: 5,
             }}
           >
-            <TextInput placeholder={"UNSW High Street"} />
+            <TextInput
+              placeholder={"UNSW High Street"}
+              onChangeText={(value) => setto(value)}
+            />
           </View>
           <Fontisto name="close" size={24} color="white" />
         </View>

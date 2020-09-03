@@ -11,6 +11,7 @@ import { mainColor } from "../../constants/colors/Colors";
 import { AntDesign } from "@expo/vector-icons";
 import { textSize, marginMedium } from "../../constants/dimensions/Dimensions";
 import { useNavigation } from "@react-navigation/native";
+
 export const EditPayments = () => {
   const naviagtion = useNavigation();
   return (

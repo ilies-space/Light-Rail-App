@@ -4,12 +4,17 @@
 import React from "react";
 import { View, Text, Dimensions } from "react-native";
 import { Header } from "../../components/Header";
-import { TextInput, ScrollView } from "react-native-gesture-handler";
+import {
+  TextInput,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
 import { mainColor } from "../../constants/colors/Colors";
 import { marginMedium, textSize } from "../../constants/dimensions/Dimensions";
 import { FontAwesome } from "@expo/vector-icons";
 import MapView from "react-native-maps";
-export const TripPlanner = () => {
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+export const TripPlanner = ({ route, to }) => {
   return (
     <View style={{ flex: 1 }}>
       <Header title={"Trip Planner"} />
@@ -23,7 +28,7 @@ export const TripPlanner = () => {
         />
       </View>
       <View flex={0.7}>
-        <Cards />
+        <Cards route={route} />
       </View>
       <View
         style={{
@@ -48,9 +53,10 @@ export const TripPlanner = () => {
   );
 };
 
-const Cards = () => {
+const Cards = ({ route }) => {
+  const navigation = useNavigation();
   return (
-    <ScrollView>
+    <TouchableOpacity onPress={() => navigation.goBack()}>
       <View
         style={{
           backgroundColor: "white",
@@ -77,73 +83,11 @@ const Cards = () => {
             <Text style={{ color: mainColor, fontSize: textSize }}>
               Work Trip
             </Text>
-            <Text>from:</Text>
-            <Text>To:</Text>
+            <Text>from: {route.params?.from}</Text>
+            <Text>to: {route.params?.to}</Text>
           </View>
         </View>
       </View>
-      <View
-        style={{
-          backgroundColor: "white",
-          marginHorizontal: marginMedium,
-          marginTop: marginMedium,
-          borderRadius: 5,
-          padding: 20,
-        }}
-      >
-        <View style={{ flexDirection: "row" }}>
-          <View
-            style={{
-              backgroundColor: mainColor,
-              height: 60,
-              width: 60,
-              marginRight: marginMedium,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <FontAwesome name="train" size={24} color="white" />
-          </View>
-          <View>
-            <Text style={{ color: mainColor, fontSize: textSize }}>
-              Work Trip
-            </Text>
-            <Text>from:</Text>
-            <Text>To:</Text>
-          </View>
-        </View>
-      </View>
-      <View
-        style={{
-          backgroundColor: "white",
-          marginHorizontal: marginMedium,
-          marginTop: marginMedium,
-          borderRadius: 5,
-          padding: 20,
-        }}
-      >
-        <View style={{ flexDirection: "row" }}>
-          <View
-            style={{
-              backgroundColor: mainColor,
-              height: 60,
-              width: 60,
-              marginRight: marginMedium,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <FontAwesome name="train" size={24} color="white" />
-          </View>
-          <View>
-            <Text style={{ color: mainColor, fontSize: textSize }}>
-              Work Trip
-            </Text>
-            <Text>from:</Text>
-            <Text>To:</Text>
-          </View>
-        </View>
-      </View>
-    </ScrollView>
+    </TouchableOpacity>
   );
 };

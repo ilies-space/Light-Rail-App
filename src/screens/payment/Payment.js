@@ -25,18 +25,20 @@ import { Home } from "../home/Home";
 import { QrPay } from "../QrPAy/QrPAy";
 import { QrPayDone } from "../paymentsDone/QrPayDone";
 import { NFCPayDone } from "../paymentsDone/NFCPayDone";
+import DropDownPicker from "react-native-dropdown-picker";
 export const Payment = () => {
-  const [priceValue, setpriceValue] = useState("$ 10.0");
-  const [show, setshow] = useState(false);
-  const [position, setposition] = useState({});
+  const [selectedValue, setSelectedValue] = useState("$ 10.0");
+  const navigation = useNavigation();
 
-  const AlertMsg = () =>
+  const AlertMsg = (selectedValue, navigation) => {
     Alert.alert(
       "Top up",
-      "Added to physical card balance",
+      selectedValue + " Added to physical card balance",
       [{ text: "OK", onPress: () => console.log("OK Pressed") }],
       { cancelable: false }
     );
+    navigation.goBack();
+  };
 
   //----
   const CardPay = () => {
@@ -105,75 +107,7 @@ export const Payment = () => {
     );
   };
   //----
-  const PricePart = () => {
-    return (
-      <View style={{ flex: 1 }}>
-        <View>
-          <View
-            style={{
-              flexDirection: "row",
-              margin: marginMedium,
-              borderBottomWidth: 1,
-              borderBottomColor: "gray",
-              paddingBottom: marginMedium,
-            }}
-          >
-            <View style={{ flex: 1 }}>
-              <Text
-                style={{ color: "gray", fontSize: textSize, marginTop: 10 }}
-              >
-                Amount
-              </Text>
-            </View>
-            <View
-              style={{
-                borderColor: "gray",
-                borderWidth: 1,
-                paddingHorizontal: marginMedium,
-              }}
-            >
-              <Picker style={{ height: 40, width: 150 }} mode={"dropdown"}>
-                <Picker.Item label="$ 10.0" value="10" />
-                <Picker.Item label="$ 20.0" value="20" />
-                <Picker.Item label="$ 30.0" value="30" />
-              </Picker>
-            </View>
-          </View>
-        </View>
-        <View>
-          <View
-            style={{
-              flexDirection: "row",
-              margin: marginMedium,
-              borderBottomWidth: 1,
-              borderBottomColor: "gray",
-              paddingBottom: marginMedium,
-            }}
-          >
-            <View style={{ flex: 1 }}>
-              <Text
-                style={{ color: "gray", fontSize: textSize, marginTop: 10 }}
-              >
-                SubTotal
-              </Text>
-            </View>
-            <View
-              style={{
-                paddingHorizontal: marginMedium,
-              }}
-            >
-              <Text
-                style={{ color: "gray", fontSize: textSize, marginTop: 10 }}
-              >
-                Final price
-              </Text>
-            </View>
-          </View>
-        </View>
-      </View>
-    );
-  };
-  //----
+
   const TopUpButton = () => {
     const navigation = useNavigation();
     return (
@@ -185,6 +119,7 @@ export const Payment = () => {
           borderRadius: 10,
           alignItems: "center",
         }}
+        onPress={() => AlertMsg(selectedValue, navigation)}
       >
         <Text style={{ color: "white", fontSize: textSize }}>Top Up</Text>
       </TouchableOpacity>
@@ -202,7 +137,42 @@ export const Payment = () => {
           </ScrollView>
         </View>
         <View flex={1}>
-          <PricePart />
+          {/* <PricePart /> */}
+
+          <View style={{ marginHorizontal: marginMedium }}>
+            <View style={{ flexDirection: "row", marginVertical: 25 }}>
+              <View style={{ flex: 1 }}>
+                <Text>Amount : </Text>
+              </View>
+              <View style={{ height: 40, width: 120 }}>
+                <DropDownPicker
+                  items={[
+                    { label: "$ 10.0", value: "$ 10.0" },
+                    {
+                      label: "$ 20.0",
+                      value: "$ 20.0",
+                    },
+                    {
+                      label: "$ 30.0",
+                      value: "$ 30.0",
+                    },
+                  ]}
+                  value={selectedValue}
+                  defaultIndex={0}
+                  containerStyle={{ width: "100%", height: "100%" }}
+                  // value={selectedValue}
+                  onChangeItem={(item) => setSelectedValue(item.value)}
+                  placeholder="$ 10.0"
+                />
+              </View>
+            </View>
+            <View style={{ flexDirection: "row" }}>
+              <View style={{ flex: 1 }}>
+                <Text>subTotal : </Text>
+              </View>
+              <Text>{selectedValue}</Text>
+            </View>
+          </View>
         </View>
         <TopUpButton />
       </View>

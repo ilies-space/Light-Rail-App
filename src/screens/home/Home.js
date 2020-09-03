@@ -8,6 +8,7 @@ import { Header } from "../../components/Header";
 import { textSize, marginMedium } from "../../constants/dimensions/Dimensions";
 import { app_name } from "../../constants/data/Data";
 import MapView from "react-native-maps";
+import DropDownPicker from "react-native-dropdown-picker";
 
 export const Home = ({ navigation }) => {
   const [selectedValue, setSelectedValue] = useState("test");
@@ -15,6 +16,27 @@ export const Home = ({ navigation }) => {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Header title={app_name} />
+      <View style={{ width: 220, height: 60 }}>
+        <DropDownPicker
+          items={[
+            { label: "Where To ?", value: "Where To ?", selected: true },
+            { label: "UNSW High Street?", value: "UNSW High Street?" },
+            {
+              label: "Kensington Light rail station ?",
+              value: "Kensington Light rail station ?",
+            },
+            {
+              label: "Kingford Light rail station ?",
+              value: "Kingford Light rail station ?",
+            },
+          ]}
+          defaultIndex={0}
+          containerStyle={{ width: "100%", height: "100%" }}
+          value={selectedValue}
+          onChangeItem={(item) => navigation.push("TripDetails")}
+          placeholder="Select an item"
+        />
+      </View>
       <View style={{ flex: 1, width: "100%", height: "100%" }}>
         <MapView
           style={{
@@ -22,55 +44,6 @@ export const Home = ({ navigation }) => {
             height: Dimensions.get("window").height,
           }}
         />
-      </View>
-
-      <View
-        style={{
-          height: 20,
-          top: 65,
-          left: 20,
-          backgroundColor: "red",
-          position: "absolute",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#fff",
-          padding: marginMedium,
-          borderColor: "gray",
-          borderWidth: 1,
-        }}
-      >
-        <Text style={{ color: "#83B1EB" }}>View larger map</Text>
-      </View>
-
-      <View
-        style={{
-          height: 60,
-          backgroundColor: "red",
-          position: "absolute",
-          top: 100,
-          width: "90%",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#dcdde1",
-          borderRadius: 10,
-        }}
-      >
-        <Picker
-          style={{
-            height: 40,
-            width: "100%",
-          }}
-          mode={"dropdown"}
-          selectedValue={selectedValue}
-          onValueChange={(itemValue, itemIndex) =>
-            navigation.push("TripDetails")
-          }
-        >
-          <Picker.Item label="Where To ?" value="0" />
-          <Picker.Item label="UNSW High Street?" value="0" />
-          <Picker.Item label="Kingford Light rail station ?" value="0" />
-          <Picker.Item label="Kensington Light rail station ?" value="0" />
-        </Picker>
       </View>
     </View>
   );
